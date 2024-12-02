@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>">
+    <title>Will You Go Out With Me?</title>
+        <!-- Replace the old EmailJS script with these two scripts -->
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+        <script type="text/javascript">
+            (function() {
+                emailjs.init("S5wS17__vYdvKsGmj");
+            })();
+        </script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffd6e6;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            min-height: 300px;
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ff4d88;
+            margin-bottom: 30px;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            padding: 0 10px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            min-height: 200px;
+        }
+
+        button {
+            padding: 8px 20px;
+            font-size: clamp(14px, 3vw, 16px);
+            cursor: pointer;
+            border: none;
+            border-radius: 25px;
+            transition: transform 0.2s;
+            min-width: 100px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            height: 35px;
+            line-height: 1;
+        }
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+            .buttons{
+                gap: 15px;
+            }
+            button{
+                min-width: 80px;
+                padding: 8px 15px;
+            }
+        }
+        @media screen and (max-width: 480px) {
+            body{
+                padding: 10px;
+            }
+            .container{
+                width: 100%;
+                padding: 5px;
+            }
+            .buttons{
+                gap: 10px;
+                width: 95%;
+        }
+        button{
+            min-width: 70px;
+            padding: 8px 12px;
+        }
+    }
+    #dateInput{
+        width: 90%;
+        max-width: 300px;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 5px;
+        border: 2px solid #ff4d88;
+    }
+    p{
+        padding: 0 20px;
+        word-wrap: break-word;
+    }
+        .yes-btn {
+            background-color: #ff4d88;
+            color: white;
+        }
+
+        .no-btn {
+            background-color: #666;
+            color: white;
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.1);
+            background-color: #ff1a75;
+        }
+        .no-btn:hover {
+            transform: scale(1.1);
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Will you go on a date with me? 🥺</h1>
+        <div class="buttons" id="buttonContainer">
+            <button class="yes-btn" onclick="sayYes()">Yes</button>
+            <button class="no-btn" onclick="createNewButton()">No</button>
+        </div>
+    </div>
+
+    <script>
+ 
+        let noClickCount = 0; // Add this counter at the top of the script
+        
+        function createNewButton() {
+            noClickCount++;
+            
+            if (noClickCount >= 5) {
+                // Show multiple Yes buttons after 5 attempts
+                const container = document.getElementById('buttonContainer');
+                container.innerHTML = ''; // Clear existing buttons
+                
+                // Create multiple Yes buttons in different positions
+                for (let i = 0; i < 10; i++) {
+                    const yesBtn = document.createElement('button');
+                    yesBtn.className = 'yes-btn';
+                    yesBtn.textContent = 'Yes';
+                    yesBtn.onclick = sayYes;
+
+                    const maxWidth = Math.min(window.innerWidth - 100, 800);
+                    const maxHeight = Math.min(window.innerHeight - 100, 600);
+                    
+                    const randomX = Math.random() * maxWidth;
+                    const randomY = Math.random() * maxHeight;
+                    
+                    yesBtn.style.position = 'fixed';
+                    yesBtn.style.left = `${randomX}px`;
+                    yesBtn.style.top = `${randomY}px`;
+                    
+                    container.appendChild(yesBtn);
+                }
+            } else {
+                // Original behavior for the first 4 clicks
+                const yesBtn = document.createElement('button');
+                yesBtn.className = 'yes-btn';
+                yesBtn.textContent = 'Yes';
+                yesBtn.onclick = sayYes;
+                
+                const container = document.getElementById('buttonContainer');
+                const randomX = Math.random() * (container.offsetWidth - 100);
+                const randomY = Math.random() * (container.offsetHeight - 40);
+                
+                yesBtn.style.position = 'absolute';
+                yesBtn.style.left = randomX + 'px';
+                yesBtn.style.top = randomY + 'px';
+                
+                container.appendChild(yesBtn);
+            }
+        }
+        
+
+        function sayYes() {
+            document.body.innerHTML = `
+                <div class="container">
+                    <h1>Yay! 🎉</h1>
+                    <p style="font-size: clamp(18px, 3vw, 24px); color: #ff4d88;">I'm so happy you said yes! ❤️</p>
+                    <div style="margin-top: 20px;">
+                        <p style="font-size: clamp(16px, 2.5vw, 18px); color: #ff4d88;">When are you available?</p>
+                        <input type="datetime-local" id="dateInput" style="padding: 10px; margin: 10px;">
+                        <button class="yes-btn" onclick="submitDate()">Submit</button>
+                    </div>
+                </div>
+            `;
+        }
+
+    
+        function submitDate() {
+            const selectedDate = document.getElementById('dateInput').value;
+            if (!selectedDate) {
+                alert('Please select a date and time!');
+                return;
+            }
+            
+            const dateObj = new Date(selectedDate);
+            const day = dateObj.toLocaleString('en-US', { weekday: 'long' });
+
+            // Send email using EmailJS
+            emailjs.send("service_o6yxzgm", "template_4n7ij3t", {
+                date: dateObj.toLocaleString(),
+                day: day // Add the day field
+            })
+            .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                alert(`Great! Your date is scheduled for ${dateObj.toLocaleString()} (${day})`);
+                
+                document.body.innerHTML = `
+                    <div class="container">
+                        <h1>It's a date! 📅</h1>
+                        <p style="font-size: 24px; color: #ff4d88;">Looking forward to seeing you on ${dateObj.toLocaleString()} (${day}) ❤️</p>
+                    </div>
+                `;
+            }, function(error) {
+                console.error('FAILED...', error);
+                alert('Failed to send email notification. Please check the console for more details.');
+            });
+        }
+    
+
+    </script>
+
+</body>
+</html>
